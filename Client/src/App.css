@@ -1,0 +1,13 @@
+.shadow{
+    box-shadow: 2px 1px 11px 1px rgba(168,168,168,1);
+    -webkit-box-shadow: 2px 1px 11px 1px rgba(168,168,168,1);
+    -moz-box-shadow: 2px 1px 11px 1px rgba(168,168,168,1);
+}
+
+.content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
