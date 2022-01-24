@@ -14,3 +14,13 @@ npm i
 cd Server
 pip install -r requirements.txt
 ```
+## Running in development mode
+Run the following command in the Client folder 
+
+```bash
+npm start
+```
+Run the following command in the Server folder 
+```bash
+python main.py
+```
