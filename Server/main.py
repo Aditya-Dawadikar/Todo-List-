@@ -1,10 +1,15 @@
 from flask import Flask,send_file, request
 from flask_restful import Api, Resource
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+
+from config import jwt
 
 app = Flask(__name__)
 api = Api(app)
 cors=CORS(app,resources={r"/api/*": {"origins": "http://localhost:3000"}})
+app.config["JWT_SECRET_KEY"] = jwt["jwt-key"]
+jwt = JWTManager(app)
 
 #importing resources
 from app.Routes import ToDo as todo_resources
@@ -17,7 +22,6 @@ from app.Routes import User as user_resources
 #user
 api.add_resource(user_resources.UserLogin,'/api/user/login')
 api.add_resource(user_resources.UserSignup,'/api/user/signup')
-api.add_resource(user_resources.UserDelete,'/api/user/delete')
 
 #todo
 api.add_resource(todo_resources.TodoList,'/api/todo')

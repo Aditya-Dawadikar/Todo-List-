@@ -2,10 +2,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 
-
-import Footer from '../Components/WebsiteEssentials/Footer'
-import Navigation from '../Components/WebsiteEssentials/Navigation'
-
 const Login = () => {
 
   const [username, setusername] = useState("")
@@ -25,6 +21,7 @@ const Login = () => {
         password: password
       }).then(res => {
         if (res.status === 200) {
+          sessionStorage.setItem("token",String(res.data.token))
           window.location.href = '/todo?userid=' + res.data.userid
         }
         resetForm()
@@ -50,6 +47,7 @@ const Login = () => {
           todo: []
         }).then(res => {
           if (res.status === 200) {
+            sessionStorage.setItem("token",String(res.data.token))
             window.location.href = '/todo?userid=' + res.data.userid
           }
           resetForm()

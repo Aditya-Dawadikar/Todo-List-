@@ -32,7 +32,9 @@ const Todo = () => {
 
   useEffect(() => {
     if (typeof userid !== 'undefined') {
-      axios.get("http://localhost:5000/api/todo?userid=" + userid)
+
+      let token = sessionStorage.getItem("token")
+      axios.get("http://localhost:5000/api/todo?userid=" + userid,{headers:{Authorization:"Bearer "+token}})
         .then((resobj) => {
           settodolist(resobj.data)
         }).catch(err => {

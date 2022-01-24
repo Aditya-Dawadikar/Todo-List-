@@ -25,7 +25,8 @@ const AddTodo = (props) => {
          
         let url = new URL(window.location.href);
         let userid = url.searchParams.get("userid");
-        axios.post("http://localhost:5000/api/todo?userid="+userid,todoObject)
+        let token = sessionStorage.getItem("token")
+        axios.post("http://localhost:5000/api/todo?userid="+userid,todoObject,{headers:{Authorization:"Bearer "+token}})
         .then(res=>{
             console.log(res.data)
         }).catch(err=>{

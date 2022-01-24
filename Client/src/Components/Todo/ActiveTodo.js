@@ -19,8 +19,9 @@ const ActiveTodo = (props) => {
 
     function updateDBTodoList(newtodolist) {
         let userid = new URL(window.location.href).searchParams.get("userid")
+        let token = sessionStorage.getItem("token")
         let endpoint = "http://localhost:5000/api/todo?userid=" + userid
-        axios.patch(endpoint, newtodolist)
+        axios.patch(endpoint, newtodolist,{headers:{Authorization:"Bearer "+token}})
             .then(res => {
                 console.log(res)
             }).catch(err => {
@@ -44,8 +45,10 @@ const ActiveTodo = (props) => {
     function deleteTodo() {
         props.removeTodo(currtodo)
         let userid = new URL(window.location.href).searchParams.get("userid")
+        let token = sessionStorage.getItem("token")
         let endpoint = "http://localhost:5000/api/todo?userid=" + userid
         axios.delete(endpoint, {
+            headers:{Authorization:"Bearer "+token},
             data: {
                 title: currtodo.title
             }

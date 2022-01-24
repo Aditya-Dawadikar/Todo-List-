@@ -1,10 +1,12 @@
 from flask import request,jsonify
 from flask_restful import Resource
 from bson.objectid import ObjectId
+from flask_jwt_extended import jwt_required
 
 import database
 
 class TodoList(Resource):
+    @jwt_required()
     def get(self):  #get all todo list for a given user
         args = request.args
         userid = args["userid"]
@@ -14,6 +16,7 @@ class TodoList(Resource):
         
         return doc["todo"] 
 
+    @jwt_required()
     def post(self): #add new todo list for a given user
         args = request.args
         userid = args["userid"]
@@ -38,6 +41,7 @@ class TodoList(Resource):
                 "error":"some error occured"
             },500
 
+    @jwt_required()
     def delete(self): #delete a todo list for a given user by id
         args = request.args
         userid = args["userid"]
@@ -72,6 +76,7 @@ class TodoList(Resource):
                 "error":"some error occured"
             },500
 
+    @jwt_required()
     def patch(self): #update a todo list for a given user by id
         args = request.args
         userid = args["userid"]
